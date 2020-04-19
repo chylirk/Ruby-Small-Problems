@@ -27,22 +27,27 @@
 #        return that
 #
 #
-ADJECTIVES = %w(sleepy brown sleepy yellow)
+ADJECTIVES = %w(sleepy brown yellow)
 POSSESSIVE_ADJECTIVES = %w(his her)
 NOUNS = %w(cat dog tail)
-ADVERBS = %w(sleepy noisily lazily)
-VERBS = %w(licks looks)
+ADVERBS = %w(noisily lazily)
+VERBS = %w(licks)
+PREPOSITIONAL_VERB = %w(looks)
+PREPOSITION = %w(around outside inside)
 
 
-text = IO.read()
+text = IO.read('madlibs_file')
 
 madlib = text.split.map do |word|
-  case word.gsub(/\W/,'')
+  case word
   when 'adjective' then ADJECTIVES.sample
   when 'noun' then NOUNS.sample
+  when 'noun,' then NOUNS.sample + ','
   when 'possessive_pronoun' then POSSESSIVE_ADJECTIVES.sample
   when 'adverb' then ADVERBS.sample
   when 'verb' then VERBS.sample
+  when 'preposition' then PREPOSITION.sample
+  when 'prepositional_verb' then PREPOSITIONAL_VERB.sample
   else word
   end
 end.join(' ')
